@@ -1,5 +1,5 @@
 var ethers = require('ethers');
-var fs = require('fs');
+// var fs = require('fs');
 const ProviderEngine = require('web3-provider-engine')
 //const CacheSubprovider = require('web3-provider-engine/subproviders/cache.js')
 const FixtureSubprovider = require('web3-provider-engine/subproviders/fixture.js')
@@ -59,10 +59,11 @@ function BurnerProvider(opts = {}){
   }else{
     //local storage isn't an option and they didn't pass in a pk attempted to use the filesystem
     try{
-      let fsPk = fs.readFileSync(".pk").toString()
-      if(fsPk){
-        metaAccount = new ethers.Wallet(fsPk, provider);
-      }
+      console.log("ERROR: No access to localStorage")
+      // let fsPk = fs.readFileSync(".pk").toString()
+      // if(fsPk){
+      //   metaAccount = new ethers.Wallet(fsPk, provider);
+      // }
     }catch(e){}
     // if not just generate a temp account in memory for this session
     // (just leave metaAccount false and it will be created in the next block)
@@ -94,7 +95,7 @@ function BurnerProvider(opts = {}){
     }else{
       //if we can't use local storage try saving it to the filesystem
       try{
-        fs.writeFileSync(".pk",metaAccount.privateKey)
+        console.log("ERROR: No access to localStorage")
       }catch(e){}
     }
   }
